@@ -4,6 +4,12 @@
 
 O modRegex é um suplemento (`.xlam`) para quem precisa corrigir, padronizar e consultar endereços sem sair do Excel. A ferramenta trabalha diretamente com as células selecionadas e oferece consulta de endereços pelo CEP, utilizando o [ViaCEP](https://viacep.com.br/).
 
+### Download
+
+**[Baixar a versão mais recente do modRegex](https://github.com/VBAdev2/modRegex/releases/latest)**
+
+O arquivo `modRegex.xlam` está disponível na seção **Assets** da Release. Consulte as instruções de instalação abaixo.
+
 ## Funcionalidades
 
 - **Correção de endereços:** tratamento de textos com expressões regulares (Regex).
