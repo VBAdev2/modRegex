@@ -15,6 +15,16 @@ O modRegex é um suplemento (`.xlam`) para quem precisa corrigir, padronizar e c
 
 > A consulta disponível nesta versão é **por CEP**.
 
+## Capturas de tela
+
+### Correção de endereços
+
+![Tela de correção de endereços do modRegex](docs/correcao-enderecos.jpg)
+
+### Consulta ViaCEP
+
+![Tela de consulta ViaCEP do modRegex](docs/consulta-viacep.jpg)
+
 ## Requisitos
 
 - Microsoft Excel Desktop para **Windows**, com suporte a VBA.
