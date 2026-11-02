@@ -39,15 +39,27 @@ O arquivo `modRegex.xlam` está disponível na seção **Assets** da Release. Co
 
 ## Instalação
 
-1. Acesse a página de [Releases](https://github.com/VBAdev2/modRegex/releases) e baixe o arquivo `modRegex.xlam` da versão desejada.
-2. Salve o arquivo em uma pasta de sua preferência.
-3. Se o Windows tiver bloqueado o arquivo baixado e **você confiar na origem**, clique com o botão direito nele, abra **Propriedades** e, se disponível, marque **Desbloquear**. Confirme em **Aplicar**.
-4. No Excel, acesse **Arquivo > Opções > Suplementos**.
-5. Em **Gerenciar: Suplementos do Excel**, clique em **Ir... > Procurar...**, selecione `modRegex.xlam` e habilite o suplemento.
-6. Acesse **Arquivo > Opções > Personalizar Faixa de Opções**. Crie um grupo personalizado, escolha **Macros** na lista de comandos e adicione a macro **`AbrirFormulario`** ao grupo.
-7. Clique no novo botão para abrir o corretor.
+1. Acesse a página de [Releases](https://github.com/VBAdev2/modRegex/releases/latest) e baixe o arquivo `modRegex.xlam`.
+2. Recomenda-se salvar o suplemento na pasta padrão de suplementos do Excel:
 
-**Importante:** o formulário não abre automaticamente com o Excel. Caso a política de segurança da sua organização bloqueie macros, consulte o administrador responsável. Não é necessário desativar globalmente a proteção do Excel.
+   `C:\Users\SEU_USUARIO\AppData\Roaming\Microsoft\AddIns`
+
+   **Acesso rápido:** pressione `Win + R`, digite `%APPDATA%\Microsoft\AddIns` e pressione Enter.
+
+3. Mova o arquivo `modRegex.xlam` para essa pasta.
+4. Se o Windows tiver bloqueado o arquivo baixado e você confiar na origem, clique com o botão direito nele, acesse **Propriedades** e, se disponível, marque **Desbloquear**.
+5. Abra o Excel e acesse **Arquivo > Opções > Suplementos**.
+6. Em **Gerenciar: Suplementos do Excel**, clique em **Ir... > Procurar...**.
+7. Localize o `modRegex.xlam`, selecione-o e habilite o suplemento.
+8. Acesse **Arquivo > Opções > Personalizar Faixa de Opções**.
+9. Crie um grupo personalizado e adicione a macro `AbrirFormulario`, disponível na categoria **Macros**.
+10. Clique no botão criado para abrir o corretor.
+
+**Observações:**
+- A pasta indicada é recomendada, mas não obrigatória.
+- Mantenha o arquivo `.xlam` no mesmo local após instalá-lo.
+- O formulário abre somente quando acionado pelo usuário.
+- Caso as políticas da organização bloqueiem macros, consulte o administrador responsável. Não é necessário desativar globalmente a segurança do Excel.
 
 ## Como usar
 
