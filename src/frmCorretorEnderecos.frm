@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmCorretorEnderecos 
-   Caption         =   "REGEXTRESS - Corretor de EndereÁos - Vers„o: 0.1.0"
+   Caption         =   "modRegex - Corretor de Endere√ßos - Vers√£o: 0.2.4"
    ClientHeight    =   6315
    ClientLeft      =   120
    ClientTop       =   465
@@ -32,13 +32,13 @@ Private mDicaAtiva As Boolean
 Private mNumeroDigitado As String
 Private Sub UserForm_Initialize()
     mInicializando = True
-    Me.Caption = "modRegex - Corretor de EndereÁos - Vers„o: 0.2.4"
+    Me.Caption = "modRegex - Corretor de Endere√ßos - Vers√£o: 0.2.4"
 
     With Me.cboPadrao
         .Clear
-        .AddItem "Padr„o Brasileiro Comum v2.1"
-        .AddItem "Apenas Logradouro e N˙mero"
-        .AddItem "EndereÁo Completo (com CEP)"
+        .AddItem "Padr√£o Brasileiro Comum v2.1"
+        .AddItem "Apenas Logradouro e N√∫mero"
+        .AddItem "Endere√ßo Completo (com CEP)"
         .ListIndex = 0
     End With
 
@@ -67,10 +67,10 @@ Public Sub AtualizarLabelSelecao()
 
     Set area = Application.Selection
     Me.lblSelecao.Caption = "Selecionado: " & area.Worksheet.Name & "!" & _
-        area.Address(False, False) & " (" & Format$(area.CountLarge, "#,##0") & " cÈlulas)"
+        area.Address(False, False) & " (" & Format$(area.CountLarge, "#,##0") & " c√©lulas)"
     Exit Sub
 SemSelecao:
-    Me.lblSelecao.Caption = "Selecione cÈlulas em uma planilha."
+    Me.lblSelecao.Caption = "Selecione c√©lulas em uma planilha."
 End Sub
 Private Sub btnCorrigir_Click()
     Dim origem As Range, destino As Range, celula As Range, alvo As Range
@@ -82,54 +82,54 @@ Private Sub btnCorrigir_Click()
 
     On Error GoTo Falha
     If TypeName(Application.Selection) <> "Range" Then
-        MsgBox "Selecione os endereÁos na planilha.", vbExclamation, "modRegex"
+        MsgBox "Selecione os endere√ßos na planilha.", vbExclamation, "modRegex"
         Exit Sub
     End If
     Set origem = Application.Selection
 
     If origem.Areas.Count <> 1 Or origem.Columns.Count <> 1 Then
-        MsgBox "Selecione um intervalo contÌnuo de uma coluna.", vbExclamation, "modRegex"
+        MsgBox "Selecione um intervalo cont√≠nuo de uma coluna.", vbExclamation, "modRegex"
         Exit Sub
     End If
     If origem.CountLarge > 25000 Then
-        MsgBox "Selecione atÈ 25.000 cÈlulas por operaÁ„o.", vbExclamation, "modRegex"
+        MsgBox "Selecione at√© 25.000 c√©lulas por opera√ß√£o.", vbExclamation, "modRegex"
         Exit Sub
     End If
     If origem.Worksheet.ProtectContents Then
-        MsgBox "A planilha est· protegida.", vbExclamation, "modRegex"
+        MsgBox "A planilha est√° protegida.", vbExclamation, "modRegex"
         Exit Sub
     End If
     If IsNull(origem.MergeCells) Then
-        MsgBox "O intervalo pode conter cÈlulas mescladas.", vbExclamation, "modRegex"
+        MsgBox "O intervalo pode conter c√©lulas mescladas.", vbExclamation, "modRegex"
         Exit Sub
     End If
     If origem.MergeCells Then
-        MsgBox "O intervalo contÈm cÈlulas mescladas.", vbExclamation, "modRegex"
+        MsgBox "O intervalo cont√©m c√©lulas mescladas.", vbExclamation, "modRegex"
         Exit Sub
     End If
 
     If Me.optNovaColuna.Value Then
         If origem.Column = origem.Worksheet.Columns.Count Then
-            MsgBox "N„o existe coluna ‡ direita.", vbExclamation, "modRegex"
+            MsgBox "N√£o existe coluna √† direita.", vbExclamation, "modRegex"
             Exit Sub
         End If
         Set destino = origem.Offset(0, 1)
         If IsNull(destino.MergeCells) Then
-            MsgBox "O destino pode conter cÈlulas mescladas.", vbExclamation, "modRegex"
+            MsgBox "O destino pode conter c√©lulas mescladas.", vbExclamation, "modRegex"
             Exit Sub
         End If
         If destino.MergeCells Then
-            MsgBox "O destino contÈm cÈlulas mescladas.", vbExclamation, "modRegex"
+            MsgBox "O destino cont√©m c√©lulas mescladas.", vbExclamation, "modRegex"
             Exit Sub
         End If
         If Application.WorksheetFunction.CountA(destino) > 0 Then
-            MsgBox "A coluna ao lado contÈm dados. Escolha outro intervalo.", _
+            MsgBox "A coluna ao lado cont√©m dados. Escolha outro intervalo.", _
                 vbExclamation, "modRegex"
             Exit Sub
         End If
     Else
-        If MsgBox("Substituir os endereÁos selecionados?" & vbCrLf & _
-            "O VBA pode limpar o histÛrico Desfazer do Excel.", _
+        If MsgBox("Substituir os endere√ßos selecionados?" & vbCrLf & _
+            "O VBA pode limpar o hist√≥rico Desfazer do Excel.", _
             vbYesNo + vbQuestion, "modRegex") <> vbYes Then Exit Sub
         Set destino = origem
     End If
@@ -180,12 +180,12 @@ Finalizar:
 
     If falhou Then
         MsgBox "Falha: " & erroTexto & vbCrLf & _
-            "Confira os dados; parte das cÈlulas pode ter sido alterada.", _
+            "Confira os dados; parte das c√©lulas pode ter sido alterada.", _
             vbExclamation, "modRegex"
     Else
-        MsgBox total & " endereÁo(s) processado(s)." & vbCrLf & _
+        MsgBox total & " endere√ßo(s) processado(s)." & vbCrLf & _
             ignorados & " ignorado(s)." & vbCrLf & _
-            naoReconhecidos & " n„o reconhecido(s) pelo padr„o escolhido.", _
+            naoReconhecidos & " n√£o reconhecido(s) pelo padr√£o escolhido.", _
             vbInformation, "modRegex"
     End If
     AtualizarLabelSelecao
@@ -235,7 +235,7 @@ Private Sub AtualizarModoConsulta()
 End Sub
 Private Function TextoDica() As String
     If Me.optPesquisarEndereco.Value Then
-        TextoDica = "Rua, n∫ - Cidade/UF"
+        TextoDica = "Rua, n¬∫ - Cidade/UF"
     Else
         TextoDica = "00000-000"
     End If
@@ -397,7 +397,7 @@ Private Function EhNumeroDeImovel(ByVal valor As String) As Boolean
     On Error GoTo Fim
     Set regex = CreateObject("VBScript.RegExp")
     With regex
-        .Pattern = "^(n[.o∫∞]?\s*)?[0-9]+[A-Za-z]?$"
+        .Pattern = "^(n[.o¬∫¬∞]?\s*)?[0-9]+[A-Za-z]?$"
         .IgnoreCase = True
         .Global = False
     End With
@@ -479,7 +479,7 @@ Private Sub AtualizarBotaoPesquisa()
     Else
         proximo = mIndiceResultado + 1
         If proximo > mRegistros.Count Then proximo = 1
-        Me.btnConsultarCEP.Caption = "PrÛximo " & proximo & "/" & mRegistros.Count
+        Me.btnConsultarCEP.Caption = "Pr√≥ximo " & proximo & "/" & mRegistros.Count
     End If
 End Sub
 Private Sub SelecionarRegistro(ByVal indice As Long)
@@ -554,30 +554,30 @@ Private Sub btnCopiar_Click()
     Me.btnCopiar.Caption = "Copiado"
     Exit Sub
 Falha:
-    MsgBox "N„o foi possÌvel copiar: " & Err.Description, vbExclamation, "modRegex"
+    MsgBox "N√£o foi poss√≠vel copiar: " & Err.Description, vbExclamation, "modRegex"
 End Sub
 Private Sub btnInserirExcel_Click()
     Dim destino As Range, conteudo As String
     On Error GoTo Falha
     If Not mTemResultado Then Exit Sub
     If TypeName(Application.Selection) <> "Range" Then
-        MsgBox "Selecione uma cÈlula do Excel.", vbExclamation, "modRegex"
+        MsgBox "Selecione uma c√©lula do Excel.", vbExclamation, "modRegex"
         Exit Sub
     End If
 
     Set destino = Application.Selection
     If destino.CountLarge <> 1 Then
-        MsgBox "Selecione apenas uma cÈlula de destino.", vbExclamation, "modRegex"
+        MsgBox "Selecione apenas uma c√©lula de destino.", vbExclamation, "modRegex"
         Exit Sub
     End If
     If destino.Worksheet.ProtectContents Or destino.MergeCells Then
-        MsgBox "O destino est· protegido ou mesclado.", vbExclamation, "modRegex"
+        MsgBox "O destino est√° protegido ou mesclado.", vbExclamation, "modRegex"
         Exit Sub
     End If
 
     conteudo = EnderecoParaTexto()
     If Not IsEmpty(destino.Value2) Or destino.HasFormula Then
-        If MsgBox("A cÈlula j· contÈm dados. Substituir?", _
+        If MsgBox("A c√©lula j√° cont√©m dados. Substituir?", _
             vbYesNo + vbQuestion, "modRegex") <> vbYes Then Exit Sub
     End If
 
@@ -585,5 +585,5 @@ Private Sub btnInserirExcel_Click()
     Me.btnInserirExcel.Caption = "Inserido"
     Exit Sub
 Falha:
-    MsgBox "N„o foi possÌvel inserir: " & Err.Description, vbExclamation, "modRegex"
+    MsgBox "N√£o foi poss√≠vel inserir: " & Err.Description, vbExclamation, "modRegex"
 End Sub
